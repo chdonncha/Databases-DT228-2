@@ -1,0 +1,20 @@
+--List all details of all spots--
+
+select * from SPORT;
+
+--List all details of Discipline--
+
+select * from DISCIPLINE;
+
+--List details of all events that were scheduled between the 3rd and 11th of June--
+
+select * from EVENT
+
+WHERE EVENTDATE >= '03-JUNE-12'
+AND EVENTDATE <= '11-JUNE-12';
+
+--Find details of all competitors with the letter a in their name--
+
+select * from COMPETITOR;
+
+

@@ -1,0 +1,87 @@
+-- insert data into columns in the tables --
+
+insert into Customer values('C1001', 'C.Baker', '01237230', '11 Tempest View, Dublin');
+insert into Customer values('C1002', 'W.Lawrence', '0139489', '9 CastleTown, Wexford');
+insert into Customer values('C1003', 'R.Schmidt', '01297830', '221 Wicklow Heights, Wicklow');
+insert into Customer values('C1004', 'J.Robertson', '01697230', '83 Templeroan Ave, Dublin');
+insert into Customer values('C1005', 'A.Nelson', '01239560', '52 Prospect, Dublin');
+insert into Customer values('C1006', 'W.Scott', '01230969', '18 Ballyboden, Wicklow');
+insert into Customer values('C1007', 'J.Wagner', '01264238', '112 Blackrock, Wexford');
+insert into Customer values('C1008', 'W.Walker', '01658230', '99 Longmile Road, Dublin');
+insert into Customer values('C1009', 'P.Richards', '01937730', '201 Kimmage, Dublin');
+insert into Customer values('C1010', 'H.Marshall', '01277730', '29 Teranure Green, Dublin');
+
+insert into Customer_Payment values('P1001', '22 Sep 2001', '1000.00');
+insert into Customer_Payment values('P1002', '05 Dec 2001', '250.00');
+insert into Customer_Payment values('P1003', '07 Jan 2001', '300.00');
+insert into Customer_Payment values('P1004', '09 Jun 2001', '400.00');
+insert into Customer_Payment values('P1005', '12 Dec 2001', '200.00');
+insert into Customer_Payment values('P1006', '15 Sep 2001', '600.00');
+insert into Customer_Payment values('P1007', '20 Sep 2001', '250.00');
+insert into Customer_Payment values('P1008', '21 Dec 2001', '750.00');
+insert into Customer_Payment values('P1009', '15 Dec 2001', '1250.00');
+insert into Customer_Payment values('P1010', '14 Jan 2002', '500.00');
+insert into Customer_Payment values('P1011', '17 Dec 2002', '250.00');
+insert into Customer_Payment values('P1012', '20 Sep 2002', '200.00');
+insert into Customer_Payment values('P1013', '28 Sep 2002', '400.00');
+insert into Customer_Payment values('P1014', '22 Dec 2002', '900.00');
+insert into Customer_Payment values('P1015', '19 Mar 2002', '1000.00');
+
+insert into LightingSystem values('CO1001', 'P1001', 'C1001', '09 Sep 2001','17 Sep 2001');
+insert into LightingSystem values('CO1002', 'P1002', 'C1002', '01 Dec 2001','03 Dec 2001');
+insert into LightingSystem values('CO1003', 'P1003', 'C1003', '02 Jan 2001','05 Jan 2001');
+insert into LightingSystem values('CO1004', 'P1004', 'C1004', '01 Jun 2001','08 Jun 2001');
+insert into LightingSystem values('CO1005', 'P1005', 'C1005', '02 Dec 2001','08 Dec 2001');
+insert into LightingSystem values('CO1006', 'P1006', 'C1006', '04 Sep 2001','12 Sep 2001');
+insert into LightingSystem values('CO1007', 'P1007', 'C1007', '08 Sep 2001','14 Sep 2001');
+insert into LightingSystem values('CO1008', 'P1008', 'C1008', '05 Dec 2001','17 Dec 2001');
+insert into LightingSystem values('CO1009', 'P1009', 'C1009', '09 Dec 2001','12 Dec 2001');
+insert into LightingSystem values('CO1010', 'P1010', 'C1010', '05 Jan 2001','08 Jan 2001');
+insert into LightingSystem values('CO1011', 'P1011', 'C1006', '07 Dec 2002','13 Dec 2002');
+insert into LightingSystem values('CO1012', 'P1012', 'C1001', '09 Sep 2002','12 Sep 2002');
+insert into LightingSystem values('CO1013', 'P1013', 'C1003', '12 Sep 2002','18 Sep 2002');
+insert into LightingSystem values('CO1014', 'P1014', 'C1009', '16 Dec 2002','20 Dec 2002');
+insert into LightingSystem values('CO1015', 'P1015', 'C1001', '13 Mar 2002','16 Mar 2002');
+
+insert into LightingSpec values('CO1001', 'Garden Lighting');
+insert into LightingSpec values('CO1002', 'Hall, Stairs, and Landing');
+insert into LightingSpec values('CO1003', 'Hall');
+insert into LightingSpec values('CO1004', 'LivingRoom');
+insert into LightingSpec values('CO1005', 'Garden Lighting');
+insert into LightingSpec values('CO1006', 'Landing');
+insert into LightingSpec values('CO1007', 'Kitchen');
+insert into LightingSpec values('CO1008', 'LivingRoom, Kitchen');
+insert into LightingSpec values('CO1009', 'Landing, Stairs');
+insert into LightingSpec values('CO1010', 'Hall');
+insert into LightingSpec values('CO1011', 'Landing, Kitchen');
+insert into LightingSpec values('CO1012', 'Hall');
+insert into LightingSpec values('CO1013', 'Garden Lighting');
+insert into LightingSpec values('CO1014', 'Landing');
+insert into LightingSpec values('CO1015', 'Stairs');
+
+insert into Employee values('E1001', 'D1001', 'CO1001', 'Carolyn Wheeler');
+insert into Employee values('E1002', 'D1001', 'CO1001', 'Adam Marshall');
+insert into Employee values('E1003', 'D1002', 'CO1003', 'Theresa Hamilton');
+insert into Employee values('E1004', 'D1002', 'CO1002', 'Jeffrey Mccoy');
+insert into Employee values('E1005', 'D1002', 'CO1005', 'Todd Reed');
+insert into Employee values('E1006', 'D1003', 'CO1008', 'Diane Walker');
+insert into Employee values('E1008', 'D1003', 'CO1009', 'Virginia Bryant');
+insert into Employee values('E1009', 'D1004', 'CO10012', 'Kenneth Willis');
+insert into Employee values('E1010', 'D1004', 'CO1009', 'Lillian Allen');
+
+insert into Department values(D1001, 'Design');
+insert into Department values(D1002, 'Fitters');
+insert into Department values(D1003, 'Shop floor');
+insert into Department values(D1004, 'Electricians');
+
+
+
+
+
+
+
+
+
+
+Terry	King
+Steven	Matthews

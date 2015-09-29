@@ -1,0 +1,187 @@
+DROP TABLE Employee CASCADE CONSTRAINTS PURGE
+;
+
+DROP TABLE StockAllocated CASCADE CONSTRAINTS PURGE
+;
+
+DROP TABLE StockOrderItem CASCADE CONSTRAINTS PURGE
+;
+
+DROP TABLE Stock CASCADE CONSTRAINTS PURGE
+;
+
+DROP TABLE StockCategory CASCADE CONSTRAINTS PURGE
+;
+
+DROP TABLE Department CASCADE CONSTRAINTS PURGE
+;
+
+DROP TABLE SupplierPayment CASCADE CONSTRAINTS PURGE
+;
+ 
+DROP TABLE StockOrder CASCADE CONSTRAINTS PURGE
+;
+
+DROP TABLE Supplier CASCADE CONSTRAINTS PURGE
+;
+
+DROP TABLE LightingSpec CASCADE CONSTRAINTS PURGE
+;
+
+DROP TABLE LightingSystem CASCADE CONSTRAINTS PURGE
+;
+
+DROP TABLE Customer CASCADE CONSTRAINTS PURGE
+;
+
+DROP TABLE Customer_Payment CASCADE CONSTRAINTS PURGE
+;
+
+CREATE TABLE Customer_Payment 
+( 
+	PaymentNo          VARCHAR2(6)  NOT NULL ,
+	CustomerPayDate    DATE  NULL ,
+	CustomerPayPrice   NUMBER(5,2)  NULL ,
+	CONSTRAINT XPKCustomer_Payment PRIMARY KEY   (PaymentNo )
+)
+;
+
+CREATE TABLE Customer
+( 
+	CustomerID         VARCHAR2(6)  NOT NULL ,
+	customerName       VARCHAR2(30)  NULL ,
+	customerPhone      VARCHAR2(20)  NULL ,
+	customerAddress    VARCHAR2(40)  NULL ,
+	CONSTRAINT XPKCustomer PRIMARY KEY   (CustomerID )
+)
+;
+
+CREATE TABLE LightingSystem
+( 
+	ContractID         VARCHAR2(6)  NOT NULL ,
+	PaymentNo          VARCHAR2(6)  NULL ,
+	CustomerID         VARCHAR2(6)  NULL ,
+	DepartmentCharged  VARCHAR2(20)  NULL ,
+	ReturnDate         DATE  NULL ,
+	StartDate          DATE  NULL ,
+	CONSTRAINT XPKLightingSystem PRIMARY KEY   (ContractID ),
+	CONSTRAINT R_17 FOREIGN KEY (PaymentNo) REFERENCES Customer_Payment(PaymentNo),
+CONSTRAINT R_22 FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID),
+CONSTRAINT R_25 FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID)
+)
+;
+
+CREATE TABLE LightingSpec
+( 
+	ContractID         VARCHAR2(6)  NOT NULL ,
+	LightingArea       VARCHAR2(20)  NULL ,
+	CONSTRAINT XPKLightingSpec PRIMARY KEY   (ContractID ),
+	CONSTRAINT R_20 FOREIGN KEY (ContractID) REFERENCES LightingSystem(ContractID)
+)
+;
+
+CREATE TABLE Supplier
+( 
+	SupplierID         VARCHAR2(6)  NOT NULL ,
+	SupplierName       VARCHAR2(30)  NULL ,
+	SupplierAddress    VARCHAR2(40)  NULL ,
+	CONSTRAINT XPKSupplier PRIMARY KEY   (SupplierID )
+)
+;
+
+CREATE TABLE StockOrder
+( 
+	OrderID            VARCHAR2(6)  NOT NULL ,
+	SupplierID         VARCHAR2(6)  NULL ,
+	DeliveryDate       DATE  NULL ,
+	OrderDate          DATE  NULL ,
+	CONSTRAINT XPKStockOrder PRIMARY KEY   (OrderID ),
+	CONSTRAINT R_24 FOREIGN KEY (SupplierID) REFERENCES Supplier(SupplierID)
+)
+;
+
+CREATE TABLE SupplierPayment
+( 
+	SupplierPaymentNo  VARCHAR2(6)  NOT NULL ,
+	OrderID            VARCHAR2(6)  NULL ,
+	SupplierPayPrice   NUMBER(5,2)  NULL ,
+	SupplierPayDate    DATE  NULL ,
+	CONSTRAINT XPKSupplierPayment PRIMARY KEY   (SupplierPaymentNo ),
+	CONSTRAINT R_15 FOREIGN KEY (OrderID) REFERENCES StockOrder(OrderID)
+)
+;
+
+CREATE TABLE Department
+( 
+	DepartmentID       VARCHAR2(6)  NOT NULL ,
+	DepartmentDesc     VARCHAR2(20)  NULL ,
+	CONSTRAINT XPKDepartment PRIMARY KEY   (DepartmentID )
+)
+;
+
+CREATE TABLE StockCategory
+( 
+	CategoryID         VARCHAR2(6)  NOT NULL ,
+	DepartmentID       VARCHAR2(6)  NULL ,
+	CategoryDesc       VARCHAR2(20)  NULL ,
+	CONSTRAINT XPKStockCategory PRIMARY KEY   (CategoryID ),
+	CONSTRAINT R_10 FOREIGN KEY (DepartmentID) REFERENCES Department(DepartmentID)
+)
+;
+
+CREATE TABLE Stock
+( 
+	StockCode          VARCHAR2(6)  NOT NULL ,
+	CategoryID         VARCHAR2(6)  NULL ,
+	StockDesc          VARCHAR2(30)  NULL ,
+	StockQuantity      NUMBER(6)  NULL ,
+	CONSTRAINT XPKStock PRIMARY KEY   (StockCode ),
+	CONSTRAINT R_9 FOREIGN KEY (CategoryID) REFERENCES StockCategory(CategoryID)
+)
+;
+
+CREATE TABLE StockOrderItem
+( 
+	StockCode          VARCHAR2(6)  NOT NULL ,
+	OrderID            VARCHAR2(6)  NOT NULL ,
+	StockOrderQuantity NUMBER(6)  NULL ,
+	CONSTRAINT XPKStockOrderItem PRIMARY KEY   (StockCode ,OrderID ),
+	CONSTRAINT R_13 FOREIGN KEY (StockCode) REFERENCES Stock(StockCode),
+CONSTRAINT R_12 FOREIGN KEY (OrderID) REFERENCES StockOrder(OrderID)
+)
+;
+
+CREATE TABLE StockAllocated
+( 
+	ContractID         VARCHAR2(6)  NOT NULL ,
+	StockCode          VARCHAR2(6)  NOT NULL ,
+	NumberofUnits      NUMBER  NULL ,
+	PricePerUnit       NUMBER(5,2)  NULL ,
+	CONSTRAINT XPKStockAllocated PRIMARY KEY   (ContractID ,StockCode ),
+	CONSTRAINT R_5 FOREIGN KEY (ContractID) REFERENCES LightingSystem(ContractID),
+CONSTRAINT R_6 FOREIGN KEY (StockCode) REFERENCES Stock(StockCode)
+)
+;
+
+CREATE TABLE Employee
+( 
+	EmployeeID         VARCHAR2(6)  NOT NULL ,
+	DepartmentID       VARCHAR2(6)  NOT NULL ,
+	ContractID         VARCHAR2(6)  NULL ,
+	EmployeeName       VARCHAR2(30)  NULL ,
+	CONSTRAINT XPKEmployee PRIMARY KEY   (EmployeeID ,DepartmentID ),
+	CONSTRAINT R_18 FOREIGN KEY (ContractID) REFERENCES LightingSystem(ContractID),
+CONSTRAINT R_8 FOREIGN KEY (DepartmentID) REFERENCES Department(DepartmentID),
+CONSTRAINT R_11 FOREIGN KEY (DepartmentID) REFERENCES Department(DepartmentID)
+)
+;
+
+insert into Customer values('C1001', 'C.Baker', '01237230', '11 Tempest View, Dublin');
+insert into Customer values('C1002', 'W.Lawrence', '0139489', '9 CastleTown, Wexford');
+insert into Customer values('C1003', 'R.Schmidt', '01297830', '221 Wicklow Heights, Wicklow');
+insert into Customer values('C1004', 'J.Robertson', '01697230', '83 Templeroan Ave, Dublin');
+insert into Customer values('C1005', 'A.Nelson', '01239560', '52 Prospect, Dublin');
+insert into Customer values('C1006', 'W.Scott', '01230969', '18 Ballyboden, Wicklow');
+insert into Customer values('C1007', 'J.Wagner', '01264238', '112 Blackrock, Wexford');
+insert into Customer values('C1008', 'W.Walker', '01658230', '99 Longmile Road, Dublin');
+insert into Customer values('C1009', 'P.Richards', '01937730', '201 Kimmage, Dublin');

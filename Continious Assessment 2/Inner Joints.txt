@@ -1,0 +1,7 @@
+WHAT WE CAN FIND WITH INNER JOINS!
+
+-	customer detail for each lighting system
+-	employee details who made lighting system
+-	department detials for stock category
+-	supplier details for stock order
+-	stock categries on order

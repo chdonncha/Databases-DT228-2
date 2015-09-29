@@ -1,0 +1,21 @@
+Types of Lighting:
+
+indoor,
+outdoor,
+commercial,
+domestic.
+
+
+Customer Details:
+
+Cust Name,
+Cust Address,
+Area to be lit.
+
+
+Lighting:
+
+Light Stock,
+Light Price.
+
+

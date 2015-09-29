@@ -1,0 +1,51 @@
+-- Drop tables and removes all constraints --
+
+DROP TABLE LightDesignItems CASCADE CONSTRAINTS PURGE;
+
+DROP TABLE LightStock CASCADE CONSTRAINTS PURGE;
+
+DROP TABLE Specification CASCADE CONSTRAINTS PURGE;
+
+DROP TABLE Customer CASCADE CONSTRAINTS PURGE;
+
+CREATE TABLE Customer
+(
+	customerID           NUMBER(6) NOT NULL ,
+	customerName         VARCHAR2(30) NULL ,
+	customerAddress      VARCHAR2(30) NULL ,
+	customerPhone        VARCHAR2(20) NULL ,
+CONSTRAINT  XPKCustomer PRIMARY KEY (customerID)
+);
+
+
+-- Create Tables, identifying the Attributes, Logical Data types, 
+-- Primary keys and Foreign Keys --
+
+CREATE TABLE Specification
+(
+	specificationID      NUMBER NOT NULL ,
+	customerID           NUMBER(6) NULL ,
+	specDesc             VARCHAR2(40) NULL ,
+	specDate             DATE NULL ,
+	returnDate           DATE NULL ,
+	designerName         VARCHAR2(30) NULL ,
+CONSTRAINT  XPKSpecification PRIMARY KEY (specificationID),
+CONSTRAINT Customer_Spec_FK FOREIGN KEY (customerID) REFERENCES Customer (customerID)
+);
+
+CREATE TABLE LightStock
+(
+	itemID               NUMBER(6) NOT NULL ,
+	ItemDesc             VARCHAR2(30) NULL ,
+	ItemPrice            NUMBER(5,2) NULL ,
+CONSTRAINT  XPKLightStock PRIMARY KEY (itemID)
+);
+
+CREATE TABLE LightDesignItems
+(
+	specificationID      NUMBER NOT NULL ,
+	itemID               NUMBER(6) NOT NULL ,
+CONSTRAINT  XPKLightDesignItems PRIMARY KEY (specificationID,itemID),
+CONSTRAINT Spec_LightDes_FK FOREIGN KEY (specificationID) REFERENCES Specification (specificationID),
+CONSTRAINT Item_LightDes_FK FOREIGN KEY (itemID) REFERENCES LightStock (itemID)
+);
